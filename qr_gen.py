@@ -4,9 +4,6 @@ from PIL import Image
 from io import BytesIO
 import os
 
-# Get the user's Downloads folder (Mac & Windows compatible)
-downloads_folder = os.path.join(os.path.expanduser("~"), "Downloads")
-
 # Streamlit App UI
 st.title("🎭 BookMyShow QR Code Generator")
 
@@ -33,14 +30,14 @@ if url:
     img_io.seek(0)
 
     # Display the QR Code using BytesIO object
-    st.image(img_io, caption="📸 Your Generated QR Code", use_column_width=False)
+    st.image(img_io, caption="📸 Your Generated QR Code", use_container_width=False)
 
-    # Save QR Code to Downloads Folder
-    qr_filename = os.path.join(downloads_folder, "bookmyshow_qr.png")
+    # Save QR Code to Current Directory (For Streamlit Cloud)
+    qr_filename = "bookmyshow_qr.png"
     qr_img.save(qr_filename)
 
     # Show success message
-    st.success(f"✅ QR Code saved to: {qr_filename}")
+    st.success(f"✅ QR Code saved as: `{qr_filename}`")
 
     # Download Button (direct download from browser)
     st.download_button(
